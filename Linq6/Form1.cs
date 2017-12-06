@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Linq;
 using Linq6.Properties;
+using System.Data;
 
 namespace Linq6
 {
@@ -26,12 +27,11 @@ namespace Linq6
         private void Form1_Load(object sender, EventArgs e)
         {
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLcalDB;" +
+            cn.ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
                  "AttachDbFilename=|DataDirectory|Northwind.mdf;" +
                  "Integrated Security=True";
 
-            SqlDataAdapter da = new SqlDataAdapter
-                     ("select 產品編號,產品,單價,庫存量 from", cn);
+            SqlDataAdapter da = new SqlDataAdapter ("select 產品編號,產品,單價,庫存量 from 產品資料", cn);
             DataSet ds = new DataSet();
             da.Fill(ds);
             dtProduct = ds.Tables[0];
